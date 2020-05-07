@@ -1,10 +1,10 @@
-import jdk.internal.cmm.SystemResourcePressureImpl;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class Main {
@@ -17,15 +17,22 @@ public class Main {
         HashMap<String, Location> map = new HashMap<>();
 
         readFile(csvFile, map);
+        map.get("Aguadilla").setIsStart();
+        map.get("Cabo Rojo").setIsGoal();
 
         System.out.println(map.size());
+        
+        fillH_n(map);
 
         for(String area: map.keySet()){
 
             System.out.println(area +" -> "+ map.get(area).getNeighborsString());
         }
-
-
+        System.out.println("\nh(n)");
+        for(String area: map.keySet()) {
+        	System.out.println(area + " = " + map.get(area).h_n());
+        }
+        scan.close();
 
     }
 
@@ -41,7 +48,6 @@ public class Main {
                 int distance = Integer.parseInt(fromTo[2]);
                 int maxSpeed = Integer.parseInt(fromTo[3]);
                 int averageSpeed = Integer.parseInt(fromTo[4]);
-
 
 
                 if(map.size()>0 && map.containsKey(fromPin) && map.containsKey(toPin)){
@@ -67,12 +73,39 @@ public class Main {
                     map.get(toPin).addNeighbor(from,distance, maxSpeed,averageSpeed);
                 }
 
-
             }
+            br.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public static void fillH_n(HashMap<String, Location> map) {
+    	for(String location : map.keySet()) {
+    		if(map.get(location).isGoal()) {
+    			fillH_nHelper(map, location, 0);
+    			break;
+    		}
+    	}
+    }
+    
+    private static void fillH_nHelper(HashMap<String, Location> map, String currLocation, int travelTime) {
+    	Queue<Location> frontier = new LinkedList<>();
+    	if(map.get(currLocation).h_n() < travelTime) return;
+    	
+    	map.get(currLocation).setH_n(travelTime);
+    	
+    	for(Location l : map.get(currLocation).getNeighbors().keySet()) {
+    		frontier.add(l);
+    	}
+    	
+    	while(!frontier.isEmpty()) {
+    		Location location = frontier.remove();
+    		int[] travelInfo = map.get(currLocation).getNeighbors().get(location);
+    		int addedTime = (travelInfo[0]*3600)/travelInfo[1];
+    		fillH_nHelper(map, location.getName(), travelTime + addedTime);
+    	}
     }
 }
