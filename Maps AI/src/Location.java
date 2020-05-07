@@ -40,6 +40,7 @@ public class Location {
         neighbors.put(location, ETAvariables);
     }
 
+
     public HashMap<Location, int[]> getNeighbors(){
         return neighbors;
     }

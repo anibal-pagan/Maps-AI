@@ -67,6 +67,7 @@ public class Main {
                     map.get(toPin).addNeighbor(from,distance, maxSpeed,averageSpeed);
                 }
 
+
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
