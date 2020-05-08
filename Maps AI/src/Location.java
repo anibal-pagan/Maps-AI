@@ -7,7 +7,7 @@ public class Location {
     private boolean isGoal = false;
     private boolean isStart = false;
     private int etaFromHereToGoal = Integer.MAX_VALUE;    //h(n)
-    private int pathFromStart = 0;                        //g(n)
+    private int pathFromStart = Integer.MAX_VALUE;                        //g(n)
     private String name;
     private HashMap<Location, int[]> neighbors;           //step cost = int[3]
     private ArrayList<Location> previous;
@@ -24,6 +24,7 @@ public class Location {
 
     public void setIsStart(){
         isStart = true;
+        this.pathFromStart = 0;
     }
 
     public void setIsGoal(){

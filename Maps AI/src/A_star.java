@@ -2,13 +2,13 @@ import java.util.*;
 
 public class A_star {
 
-	Set<Location> exploredSet;
-	PriorityQueue<Location> frontier;
-	Location start;
-	Location goal;
-	Location current;
-	ArrayList<Location> path = new ArrayList<>();
-	int bestPathETA = 0;
+	private Set<Location> exploredSet;
+	private PriorityQueue<Location> frontier;
+	private Location start;
+	private Location goal;
+	private Location current;
+	private ArrayList<Location> path = new ArrayList<>();
+	private int bestPathETA = 0;
 
 	public A_star(Location start, Location goal){
 		this.start = start;
@@ -30,9 +30,10 @@ public class A_star {
 
 	private int getHnPlusGn(Location from, Location to){
 		int hn = to.h_n();
-		int gn = from.getG_n()+ from.getNeighbors().get(to)[3];   //g(n) = int[3]
-				to.setG_n(gn);
-
+		int gn = from.getG_n()+ from.getNeighbors().get(to)[3];   //step cost = int[3]
+		if(to.getG_n() > gn) {	
+			to.setG_n(gn);
+		}
 		return hn+gn;
 	}
 
@@ -45,25 +46,45 @@ public class A_star {
 		while(current != goal){
 
 			for(Location neighbor : current.getNeighbors().keySet()){
-				neighbor.addPrevious(current);
-				frontier.add(neighbor);
+				if(!exploredSet.contains(neighbor)) {
+					neighbor.addPrevious(current);
+					frontier.add(neighbor);
+				}
 			}
 			current = frontier.poll();
 			exploredSet.add(current);
 		}
 
-		
-		fillPath();
+		this.bestPathETA = current.getG_n();
+		fillPath(current);
 
 
 	}
 	
-	private void fillPath() {
-		for(Location prev : current.getAllPrevious()) {
-			
+	private boolean foundPath = false;
+	
+	private void fillPath(Location l) {
+		if(l == start) {
+			foundPath = true;
+			path.add(l);
+			return;
+		}
+		for(Location prev : l.getAllPrevious()) {
+			fillPath(prev);
+			if(foundPath) {
+				path.add(l);
+				return;
+			}
 		}
 	}
-
+	
+	public ArrayList<Location> getPath() {
+		return this.path;
+	}
+	
+	public int getETA() {
+		return this.bestPathETA;
+	}
 
 
 }
