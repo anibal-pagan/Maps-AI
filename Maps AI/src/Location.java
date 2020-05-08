@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Location {
@@ -5,15 +6,16 @@ public class Location {
 
     private boolean isGoal = false;
     private boolean isStart = false;
-    private boolean isVisited = false;
     private int etaFromHereToGoal = Integer.MAX_VALUE;    //h(n)
-    private int pathFromStart = 0;
+    private int pathFromStart = 0;                        //g(n)
     private String name;
-    private HashMap<Location, int[]> neighbors;           //g(n) = int[3]
+    private HashMap<Location, int[]> neighbors;           //step cost = int[3]
+    private ArrayList<Location> previous;
 
     public Location(String name){
         this.neighbors = new HashMap<>();
         this.name = name;
+        this.previous = new ArrayList<>();
     }
 
     public String getName(){
@@ -26,6 +28,10 @@ public class Location {
 
     public void setIsGoal(){
         isGoal = true;
+    }
+    
+    public void addPrevious(Location l) {
+    	this.previous.add(l);
     }
     
     public void setH_n(int eta) {
@@ -51,13 +57,9 @@ public class Location {
     public int getG_n(){
         return pathFromStart;
     }
-
-    public boolean isVisited(){
-        return  isVisited;
-    }
-
-    public void visit(){
-        isVisited = true;
+    
+    public ArrayList<Location> getAllPrevious() {
+    	return this.previous;
     }
 
     public void addNeighbor(Location location, int distance, int maxSpeed, int averageSpeed){
