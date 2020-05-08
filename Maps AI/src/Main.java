@@ -32,6 +32,14 @@ public class Main {
         for(String area: map.keySet()) {
         	System.out.println(area + " = " + map.get(area).h_n());
         }
+        
+        A_star a = new A_star(map.get("Aguadilla"), map.get("Cabo Rojo"));
+        
+        System.out.println("\nETA = " + a.getETA());
+        System.out.println("\nPath:");
+        for(Location l : a.getPath()) {
+        	System.out.println(l.getName());
+        }
         scan.close();
 
     }
