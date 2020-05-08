@@ -2,17 +2,19 @@ import java.util.*;
 
 public class A_star {
 
-    Stack<Location> exploredSet;
+    Set<Location> exploredSet;
     PriorityQueue<Location> frontier;
     Location start;
     Location goal;
+    Location current;
     ArrayList<Location> path = new ArrayList<>();
     int bestPathETA = 0;
 
     public A_star(Location start, Location goal){
         this.start = start;
         this.goal = goal;
-        this.exploredSet = new Stack<>();
+        this.current = start;
+        this.exploredSet = new HashSet<>();
         LocationComparator locationComparator = new LocationComparator();
         this.frontier = new PriorityQueue<>(locationComparator);
 
@@ -22,13 +24,14 @@ public class A_star {
     private class LocationComparator implements Comparator<Location>{
         @Override
         public int compare(Location o1, Location o2) {
-            return getHnPlusGn(exploredSet.peek(),o1) - getHnPlusGn(exploredSet.peek(),o2);
+            return getHnPlusGn(current,o1) - getHnPlusGn(current,o2);
         }
     }
 
     private int getHnPlusGn(Location from, Location to){
         int hn = to.h_n();
-        int gn = from.getNeighbors().get(to)[3];   //g(n) = int[3]
+        int gn = from.getG_n()+ from.getNeighbors().get(to)[3];   //g(n) = int[3]
+        to.setG_n(gn);
 
         return hn+gn;
     }
@@ -36,16 +39,16 @@ public class A_star {
     private void traversePath(){
 
         if(exploredSet.isEmpty()){
-            exploredSet.push(start);
+            exploredSet.add(start);
         }
 
-        Location current = exploredSet.peek();
         while(current != goal){
 
             for(Location neighbor : current.getNeighbors().keySet()){
-                frontier.add(neighbor);
+                if(!neighbor.isVisited()) frontier.add(neighbor);
             }
-            exploredSet.push(frontier.poll());
+            current = frontier.poll();
+            exploredSet.add(current);
         }
 
         //FALTA DEVOLVER PATH Y ETA

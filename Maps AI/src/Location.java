@@ -7,6 +7,7 @@ public class Location {
     private boolean isStart = false;
     private boolean isVisited = false;
     private int etaFromHereToGoal = Integer.MAX_VALUE;    //h(n)
+    private int pathFromStart = 0;
     private String name;
     private HashMap<Location, int[]> neighbors;           //g(n) = int[3]
 
@@ -41,6 +42,14 @@ public class Location {
     
     public int h_n() {
     	return etaFromHereToGoal;
+    }
+
+    public void setG_n(int g_n){
+        this.pathFromStart =g_n;
+    }
+
+    public int getG_n(){
+        return pathFromStart;
     }
 
     public boolean isVisited(){
