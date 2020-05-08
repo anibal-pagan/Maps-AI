@@ -33,13 +33,21 @@ public class Main {
         	System.out.println(area + " = " + map.get(area).h_n());
         }
         
-        A_star a = new A_star(map.get("Aguadilla"), map.get("Cabo Rojo"));
+//        A_star a = new A_star(map.get("Aguadilla"), map.get("Cabo Rojo"));
+        SimulatedAnnealing s = new SimulatedAnnealing(map.get("Aguadilla"), map.get("Cabo Rojo"), 1000);
         
-        System.out.println("\nETA = " + a.getETA());
+//        System.out.println("\nETA = " + a.getETA());
+//        System.out.println("\nPath:");
+//        for(Location l : a.getPath()) {
+//        	System.out.println(l.getName());
+//        }
+
+//        System.out.println("\nETA = " + s.getETA());
         System.out.println("\nPath:");
-        for(Location l : a.getPath()) {
-        	System.out.println(l.getName());
+        for(Location l : s.getPath()) {
+            System.out.println(l.getName());
         }
+
         scan.close();
 
     }
