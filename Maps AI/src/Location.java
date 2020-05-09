@@ -33,7 +33,9 @@ public class Location {
     }
     
     public void addPrevious(Location l) {
-    	this.previous.add(l);
+    	if(!previous.contains(l)) {
+    		this.previous.add(l);
+    	}
     }
     
     public void removePrevious(Location l) {

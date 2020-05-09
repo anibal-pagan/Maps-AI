@@ -48,12 +48,20 @@ public class SimulatedAnnealing {
             int delta_E = current.h_n()/60 - next.value(current);
             float randomFloat = rand.nextFloat();
             if(delta_E > 0 || Math.exp(delta_E/temperature) >= randomFloat) {
-                next.addPrevious(current);
+//                next.addPrevious(current);
                 if(next.getG_n() > current.getG_n() + current.getNeighbors().get(next)[3]) {
                 	next.setG_n(current.getG_n() + current.getNeighbors().get(next)[3]);
+                	next.addPrevious(current);
+                	if(current.getNeighbors().containsKey(next)) {
+                		current.removePrevious(next);
+                	}
                 }
                 if(current.getG_n() > next.getG_n() + next.getNeighbors().get(current)[3]) {
                 	current.setG_n(next.getG_n() + next.getNeighbors().get(current)[3]);
+                	current.addPrevious(next);
+                	if(next.getNeighbors().containsKey(current)) {
+                		next.removePrevious(current);
+                	}
                 }
                 current.isVisited = true;
                 current = next;
