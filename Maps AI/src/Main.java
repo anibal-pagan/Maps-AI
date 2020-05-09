@@ -17,8 +17,8 @@ public class Main {
         HashMap<String, Location> map = new HashMap<>();
 
         readFile(csvFile, map);
-        map.get("Aguadilla").setIsStart();
-        map.get("Cabo Rojo").setIsGoal();
+        map.get("Vega Baja").setIsStart();
+        map.get("Mayaguez").setIsGoal();
 
         System.out.println(map.size());
         
@@ -33,14 +33,8 @@ public class Main {
         	System.out.println(area + " = " + map.get(area).h_n());
         }
         
-//        A_star a = new A_star(map.get("Aguadilla"), map.get("Cabo Rojo"));
-        SimulatedAnnealing s = new SimulatedAnnealing(map.get("Aguadilla"), map.get("Cabo Rojo"), 1000);
-        
-//        System.out.println("\nETA = " + a.getETA());
-//        System.out.println("\nPath:");
-//        for(Location l : a.getPath()) {
-//        	System.out.println(l.getName());
-//        }
+        A_star s = new A_star(map.get("Vega Baja"), map.get("Mayaguez"));
+//        SimulatedAnnealing s = new SimulatedAnnealing(map.get("Vega Baja"), map.get("Mayaguez"), 1000);
 
         System.out.println("\nETA = " + s.getETA());
         System.out.println("\nPath:");
