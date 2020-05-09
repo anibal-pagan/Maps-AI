@@ -42,7 +42,7 @@ public class Main {
 //        	System.out.println(l.getName());
 //        }
 
-//        System.out.println("\nETA = " + s.getETA());
+        System.out.println("\nETA = " + s.getETA());
         System.out.println("\nPath:");
         for(Location l : s.getPath()) {
             System.out.println(l.getName());
