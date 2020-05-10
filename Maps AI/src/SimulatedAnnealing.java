@@ -89,7 +89,7 @@ public class SimulatedAnnealing {
 
     private double schedule(double t){
         int k = 20;
-        double lam = 0.005;
+        double lam = 0.003;
         int limit = 5000;
         double nT = 0;
         if(t < limit) {
