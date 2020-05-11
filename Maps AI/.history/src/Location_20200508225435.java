@@ -7,9 +7,8 @@ public class Location {
     private boolean isGoal = false;
     private boolean isStart = false;
     private int etaFromHereToGoal = Integer.MAX_VALUE;    //h(n)
-    private int pathFromStart = 999999999;                        //g(n)
+    private int pathFromStart = Integer.MAX_VALUE;                        //g(n)
     private String name;
-    boolean isVisited = false;
     private HashMap<Location, int[]> neighbors;           //step cost = int[3]
     private ArrayList<Location> previous;
 
@@ -33,16 +32,7 @@ public class Location {
     }
     
     public void addPrevious(Location l) {
-    	if(!previous.contains(l)) {
-    		this.previous.add(l);
-    	}
-    }
-    
-    public void removePrevious(Location l) {
-    	this.previous.remove(l);
-    }
-    public void removePrevious(){
-        this.previous.remove(0);
+    	this.previous.add(l);
     }
     
     public void setH_n(int eta) {
@@ -62,7 +52,7 @@ public class Location {
     }
 
     public void setG_n(int g_n){
-        this.pathFromStart = g_n;
+        this.pathFromStart =g_n;
     }
 
     public int getG_n(){
@@ -91,53 +81,4 @@ public class Location {
         }
         return str.toString();
     }
-
-
-    
-
-    public ArrayList<Edge> getEdges(){
-        ArrayList<Edge> edges = new ArrayList<>();
-        // HashMap<Location, int[]> neighbors  = loc.getNeighbors();
-       for (Location loc : this.getNeighbors().keySet() ){
-            int weight= this.getNeighbors().get(loc)[3];
-            Edge edge = new Edge(weight, this, loc);
-            edges.add(edge);
-       }
-       return edges;
-    }
-
-    public int value(Location other) {
-    	if(this.isVisited || (!this.isVisited && other.h_n() > this.h_n())) {
-    		return this.h_n()/60;
-    	}
-    	return this.h_n()/30;
-
-    }
-
-    public class Edge{
-
-    private int weight;
-	private Location startLocation;
-    private Location targetLocation;
-    
-    public Edge(int weight, Location startLocation, Location targetLocation){
-        this.weight=weight;
-        this.startLocation=startLocation;
-        this.targetLocation=targetLocation;
-    }
-
-    public int getWeight(){
-        return this.weight;
-    }
-    public Location getStartLocation(){
-        return this.startLocation;
-    }
-    public Location getTargetLocation(){
-        return this.targetLocation; 
-    }
-	
-
-    
-   
-}
 }
