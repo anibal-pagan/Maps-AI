@@ -37,14 +37,15 @@ public class Main {
 
         System.out.println("/////////////////////////////////////////////////////////////////");
 
-        ConsistentAdmissible test = new ConsistentAdmissible(map.get("Cabo Rojo"));
+        ConsistentAdmissible test = new ConsistentAdmissible(map.get("Aguadilla"));
 
-    
+        // System.out.println(test.isAdmissible(map.get("Aguadilla"),map.get("Cabo Rojo"),  0));
+        // System.out.println(test.isConsistent(map.get("Aguadilla"), map.get("Cabo Rojo")));
+
         test.computeShortestPaths();
         List<Location> hola = test.getShortestPathTo(test.getStartLocation());
-        
         System.out.println(test.isAdmissible());
-        System.out.println(test.isConsistent(new ArrayList<Location>(map.values())));
+        test.isConsistent(new ArrayList<Location>(map.values()));
 
         for(Location loc : hola)
         System.out.println(loc.getName());

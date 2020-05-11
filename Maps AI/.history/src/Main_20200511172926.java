@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -37,18 +36,16 @@ public class Main {
 
         System.out.println("/////////////////////////////////////////////////////////////////");
 
-        ConsistentAdmissible test = new ConsistentAdmissible(map.get("Cabo Rojo"));
+        ConsistentAdmissible test = new ConsistentAdmissible();
 
-    
-        test.computeShortestPaths();
-        List<Location> hola = test.getShortestPathTo(test.getStartLocation());
-        
-        System.out.println(test.isAdmissible());
-        System.out.println(test.isConsistent(new ArrayList<Location>(map.values())));
+        // System.out.println(test.isAdmissible(map.get("Aguadilla"),map.get("Cabo Rojo"),  0));
+        // System.out.println(test.isConsistent(map.get("Aguadilla"), map.get("Cabo Rojo")));
+
+        List<Location> hola = test.getShortestPathTo(map.get("Cabo Rojo"));
 
         for(Location loc : hola)
         System.out.println(loc.getName());
-
+        
         // A_star a = new A_star(map.get("Aguadilla"), map.get("Cabo Rojo"));
         
         // System.out.println("\nETA = " + a.getETA());

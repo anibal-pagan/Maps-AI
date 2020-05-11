@@ -34,9 +34,6 @@ public class Location {
     public void addPrevious(Location l) {
     	this.previous.add(l);
     }
-    public void removePrevious(){
-        this.previous.remove(0);
-    }
     
     public void setH_n(int eta) {
     	etaFromHereToGoal = eta;
@@ -83,42 +80,5 @@ public class Location {
             str.append(l.getName()+"  ");
         }
         return str.toString();
-    }
-
-    
-
-    public ArrayList<Edge> getEdges(){
-        ArrayList<Edge> edges = new ArrayList<>();
-        // HashMap<Location, int[]> neighbors  = loc.getNeighbors();
-       for (Location loc : this.getNeighbors().keySet() ){
-            int weight= this.getNeighbors().get(loc)[3];
-            Edge edge = new Edge(weight, this, loc);
-            edges.add(edge);
-       }
-       return edges;
-    }
-
-    public class Edge{
-
-    private int weight;
-	private Location startLocation;
-    private Location targetLocation;
-    
-    public Edge(int weight, Location startLocation, Location targetLocation){
-        this.weight=weight;
-        this.startLocation=startLocation;
-        this.targetLocation=targetLocation;
-    }
-
-    public int getWeight(){
-        return this.weight;
-    }
-    public Location getStartLocation(){
-        return this.startLocation;
-    }
-    public Location getTargetLocation(){
-        return this.targetLocation; 
-    }
-	
     }
 }

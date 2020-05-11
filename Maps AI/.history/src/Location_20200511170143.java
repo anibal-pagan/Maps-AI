@@ -34,8 +34,8 @@ public class Location {
     public void addPrevious(Location l) {
     	this.previous.add(l);
     }
-    public void removePrevious(){
-        this.previous.remove(0);
+    public void removePrevious(Location l){
+        this.previous.remove(l);
     }
     
     public void setH_n(int eta) {

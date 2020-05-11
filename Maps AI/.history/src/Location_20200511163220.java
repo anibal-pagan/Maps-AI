@@ -34,9 +34,6 @@ public class Location {
     public void addPrevious(Location l) {
     	this.previous.add(l);
     }
-    public void removePrevious(){
-        this.previous.remove(0);
-    }
     
     public void setH_n(int eta) {
     	etaFromHereToGoal = eta;
@@ -84,8 +81,6 @@ public class Location {
         }
         return str.toString();
     }
-
-    
 
     public ArrayList<Edge> getEdges(){
         ArrayList<Edge> edges = new ArrayList<>();
