@@ -19,8 +19,8 @@ public class Main {
         HashMap<String, Location> map = new HashMap<>();
 
         readFile(csvFile, map);
-        map.get("Cabo Rojo").setIsStart();
-        map.get("Aguadilla").setIsGoal();
+        map.get("Aguadilla").setIsStart();
+        map.get("Cabo Rojo").setIsGoal();
 
         System.out.println(map.size());
         
