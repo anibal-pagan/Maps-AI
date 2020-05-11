@@ -1,12 +1,8 @@
-
-
 public class Main {
 
-
     public static void main(String[] args) {
-        Agent agent = new Agent();
+        @SuppressWarnings("unused")
+		Agent agent = new Agent();
     }
-
-    //testing
 
 }

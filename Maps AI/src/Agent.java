@@ -2,12 +2,15 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
 public class Agent {
+	
+	ConsistentAdmissible check;
 
     public Agent(){
 
@@ -30,6 +33,7 @@ public class Agent {
 
         map.get(start).setIsStart();
         map.get(destination).setIsGoal();
+        check = new ConsistentAdmissible(map.get(destination));
         fillH_n(map);
 
 //        for(String area: map.keySet()){
@@ -46,11 +50,12 @@ public class Agent {
         switch (scan.nextInt()){
             case 0: {
                 A_star s = new A_star(map.get(start), map.get(destination));
-//                System.out.println("\nETA = " + s.getETA());
-//                System.out.println("\nPath:");
-//                for(Location l : s.getPath()) {
-//                    System.out.println(l.getName());
-//                }
+                System.out.println("\nETA = " + s.getETA());
+                System.out.println("\nPath:");
+                for(Location l : s.getPath()) {
+                    System.out.println(l.getName());
+                }
+                break;
             }
             case 1: {
                 SimulatedAnnealing s = new SimulatedAnnealing(map.get(start), map.get(destination), 1000);
@@ -59,6 +64,30 @@ public class Agent {
                 for(Location l : s.getPath()) {
                     System.out.println(l.getName());
                 }
+                break;
+            }
+            case 2: {
+            	boolean isAdmissible = check.isAdmissible();
+            	if(isAdmissible) {
+            		System.out.println("Graph is admissible!");
+            	}
+            	else {
+            		System.out.println("Graph isn`t admissible!");
+            	}
+            	break;
+            }
+            case 3: {
+            	boolean isConsistent = check.isConsistent(new ArrayList<Location>(map.values()));
+            	if(isConsistent) {
+            		System.out.println("Graph is consistent!");
+            	}
+            	else {
+            		System.out.println("Graph isn`t consistent!");
+            	}
+            	break;
+            }
+            default: {
+            	System.out.println("Error: Option not available.");
             }
         }
 
