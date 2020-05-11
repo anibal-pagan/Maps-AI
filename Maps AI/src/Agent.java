@@ -32,25 +32,25 @@ public class Agent {
         map.get(destination).setIsGoal();
         fillH_n(map);
 
-        for(String area: map.keySet()){
-
-            System.out.println(area +" -> "+ map.get(area).getNeighborsString());
-        }
-        System.out.println("\nh(n)");
-        for(String area: map.keySet()) {
-            System.out.println(area + " = " + map.get(area).h_n());
-        }
+//        for(String area: map.keySet()){
+//
+//            System.out.println(area +" -> "+ map.get(area).getNeighborsString());
+//        }
+//        System.out.println("\nh(n)");
+//        for(String area: map.keySet()) {
+//            System.out.println(area + " = " + map.get(area).h_n());
+//        }
 
         System.out.println("\nChoose the algorithm you want to run:");
         System.out.println("(0)A*   (1)Simulated Annealing  (2)Admissible   (3)Consistent");
         switch (scan.nextInt()){
             case 0: {
                 A_star s = new A_star(map.get(start), map.get(destination));
-                System.out.println("\nETA = " + s.getETA());
-                System.out.println("\nPath:");
-                for(Location l : s.getPath()) {
-                    System.out.println(l.getName());
-                }
+//                System.out.println("\nETA = " + s.getETA());
+//                System.out.println("\nPath:");
+//                for(Location l : s.getPath()) {
+//                    System.out.println(l.getName());
+//                }
             }
             case 1: {
                 SimulatedAnnealing s = new SimulatedAnnealing(map.get(start), map.get(destination), 1000);
