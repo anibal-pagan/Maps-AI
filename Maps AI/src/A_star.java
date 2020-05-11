@@ -14,6 +14,7 @@ public class A_star {
 		this.start = start;
 		this.goal = goal;
 		this.current = start;
+		this.start.setG_n(0);
 		this.exploredSet = new HashSet<>();
 		LocationComparator locationComparator = new LocationComparator();
 		this.frontier = new PriorityQueue<>(locationComparator);
@@ -24,16 +25,13 @@ public class A_star {
 	private class LocationComparator implements Comparator<Location>{
 		@Override
 		public int compare(Location o1, Location o2) {
-			return getHnPlusGn(current,o1) - getHnPlusGn(current,o2);
+			return getHnPlusGn(o1) - getHnPlusGn(o2);
 		}
 	}
 
-	private int getHnPlusGn(Location from, Location to){
+	private int getHnPlusGn(Location to){
 		int hn = to.h_n();
-		int gn = from.getG_n()+ from.getNeighbors().get(to)[3];   //step cost = int[3]
-		if(to.getG_n() > gn) {	
-			to.setG_n(gn);
-		}
+		int gn = to.getG_n();
 		return hn+gn;
 	}
 
@@ -48,6 +46,9 @@ public class A_star {
 			for(Location neighbor : current.getNeighbors().keySet()){
 				if(!exploredSet.contains(neighbor)) {
 					neighbor.addPrevious(current);
+					if(neighbor.getG_n() > current.getG_n()+current.getNeighbors().get(neighbor)[3]) {
+						neighbor.setG_n(current.getG_n()+current.getNeighbors().get(neighbor)[3]);
+					}
 					frontier.add(neighbor);
 				}
 			}
@@ -71,10 +72,14 @@ public class A_star {
 		}
 		for(Location prev : l.getAllPrevious()) {
 			fillPath(prev);
-			if(foundPath) {
-				path.add(l);
-				return;
-			}
+			if(foundPath && l.getG_n() == prev.getG_n() + l.getNeighbors().get(prev)[3]) {
+                path.add(l);
+                return;
+            }
+			else if(foundPath && l.getG_n() != prev.getG_n() + l.getNeighbors().get(prev)[3]) {
+            	foundPath = false;
+            	path = new ArrayList<>();
+            }
 		}
 	}
 	
