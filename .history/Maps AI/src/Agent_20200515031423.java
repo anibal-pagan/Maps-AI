@@ -16,7 +16,7 @@ public class Agent {
 
         askForInfo();
     }
-    // prompts the user for csv file path, algorithm to run, or verifications (admissible, inconsistent)
+
     private void askForInfo(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Welcome to Quarantine Maps! ");
@@ -86,7 +86,7 @@ public class Agent {
 
         scan.close();
     }
-    //assembles map with the read csv file lines
+
     private static void readFile(String filePath, HashMap<String, Location> map){
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
@@ -133,7 +133,6 @@ public class Agent {
         }
     }
 
-        //calculates h(n) for each location
     public static void fillH_n(HashMap<String, Location> map) {
         for(String location : map.keySet()) {
             if(map.get(location).isGoal()) {
@@ -152,7 +151,7 @@ public class Agent {
         for(Location l : map.get(currLocation).getNeighbors().keySet()) {
             frontier.add(l);
         }
-        // h(n) = optimistic cost from the current node to the destination
+
         while(!frontier.isEmpty()) {
             Location location = frontier.remove();
             int[] travelInfo = map.get(currLocation).getNeighbors().get(location);

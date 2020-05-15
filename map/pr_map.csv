@@ -1,0 +1,42 @@
+Aguadilla,Mayaguez,10,45,40
+Mayaguez,San Sebastian,7,65,20
+San Sebastian,Yauco,12,65,65
+Aguadilla,San Sebastian,8,35,20
+Yauco,Mayaguez,11,35,30
+Cabo Rojo,Yauco,9,50,45
+Cabo Rojo,Mayaguez,13,50,30
+Guanica,Cabo Rojo,12,50,40
+Yauco,Guanica,5,45,35
+Ponce,Yauco,11,65,65
+Camuy,Aguadilla,10,65,55
+Camuy,San Sebastian,7,45,40
+Camuy,Arecibo,7,65,50
+Utuado,San Sebastian,8,35,30
+Utuado,Arecibo,7,35,25
+Utuado,Orocovis,8,45,35
+Utuado,Yauco,7,35,30
+Orocovis,Ponce,9,45,45
+Orocovis,Vega Baja,10,35,30
+Orocovis,Naranjito,6,35,25
+Arecibo,Vega Baja,13,65,60
+Salinas,Ponce,14,70,70
+Salinas,Cayey,8,65,65
+Salinas,Arroyo,12,65,55
+Salinas,Orocovis,13,45,40
+Bayamon,Vega Baja,8,65,60
+Bayamon,San Juan,5,65,55
+Bayamon,Naranjito,5,45,35
+Cayey,Yabucoa,10,45,30
+Cayey,Caguas,9,65,60
+Caguas,Trujillo Alto,4,45,40
+Caguas,Juncos,5,45,40
+Caguas,Naranjito,8,45,30
+Arroyo,Yabucoa,6,45,35
+Humacao,Yabucoa,7,65,60
+Humacao,Juncos,4,45,35
+Trujillo Alto,Loiza,5,65,55
+Trujillo Alto,San Juan,3,45,30
+Loiza,Juncos,6,45,40
+Loiza,Luquillo,6,45,40
+Luquillo,Fajardo,2,45,30
+Juncos,Fajardo,9,45,45

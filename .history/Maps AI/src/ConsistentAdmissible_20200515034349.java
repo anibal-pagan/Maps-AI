@@ -83,7 +83,7 @@ public class ConsistentAdmissible {
             visited.add(actualVertex);
         }
     }
-    //obtains shortest path by checking the previous locations of a location
+
     public List<Location> getShortestPathTo(Location targetVertex) {
 
         List<Location> path = new ArrayList<>();
