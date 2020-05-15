@@ -57,7 +57,6 @@ public class Location {
     	return isGoal;
     }
     
-     // h(n) = Estimated Time of Arrival
     public int h_n() {
     	return etaFromHereToGoal;
     }
@@ -70,7 +69,6 @@ public class Location {
         return pathFromStart;
     }
     
-        //previous locations in a path
     public ArrayList<Location> getAllPrevious() {
     	return this.previous;
     }
@@ -115,7 +113,6 @@ public class Location {
 
     }
 
-    // for dijkstra's algorithm implementation
     public class Edge{
 
     private int weight;
@@ -127,7 +124,7 @@ public class Location {
         this.startLocation=startLocation;
         this.targetLocation=targetLocation;
     }
-    // weight = distance
+
     public int getWeight(){
         return this.weight;
     }

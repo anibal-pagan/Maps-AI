@@ -26,13 +26,12 @@ public class SimulatedAnnealing {
         traversePath();
     }
 
-    // equilibrium = reaching the destination
+
     public void traversePath(){
 
         for(int i=0; i<x; i++ ){
             temperature = schedule(i); //schedule[t]
             if (temperature == 0 || (current == goal && temperature < 0.05 * initialTemp)) break;
-            //choosing random neighbor
             Random rand= new Random();
             int nextInt = rand.nextInt(current.getNeighbors().size());
             int counter = 0;
@@ -73,7 +72,6 @@ public class SimulatedAnnealing {
 
     }
 
-    // calculates the temperature and cools the system
     private double schedule(double t){
         int k = 30;
         double lam = 0.003;
@@ -87,7 +85,6 @@ public class SimulatedAnnealing {
 
     private boolean foundPath = false;
 
-    //fill path with previous locations
     private void fillPath(Location l) {
         if(l == start) {
             foundPath = true;

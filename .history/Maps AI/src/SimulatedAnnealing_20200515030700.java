@@ -26,13 +26,13 @@ public class SimulatedAnnealing {
         traversePath();
     }
 
-    // equilibrium = reaching the destination
+
     public void traversePath(){
 
         for(int i=0; i<x; i++ ){
             temperature = schedule(i); //schedule[t]
+//            System.out.println("Iteration "+i+ ": Temperature: "+temperature+" Current: "+ current.getName());
             if (temperature == 0 || (current == goal && temperature < 0.05 * initialTemp)) break;
-            //choosing random neighbor
             Random rand= new Random();
             int nextInt = rand.nextInt(current.getNeighbors().size());
             int counter = 0;
@@ -44,10 +44,11 @@ public class SimulatedAnnealing {
                 counter++;
             }
             
-
+//            int delta_E = current.h_n()/60 - next.h_n()/60; //VALUE (time to travel in minutes)
             int delta_E = current.h_n()/60 - next.value(current);
             float randomFloat = rand.nextFloat();
             if(delta_E > 0 || Math.exp(delta_E/temperature) >= randomFloat) {
+//                next.addPrevious(current);
                 if(next.getG_n() > current.getG_n() + current.getNeighbors().get(next)[3]) {
                 	next.setG_n(current.getG_n() + current.getNeighbors().get(next)[3]);
                 	next.addPrevious(current);
@@ -65,7 +66,20 @@ public class SimulatedAnnealing {
                 current.isVisited = true;
                 current = next;
             }
-
+//            else {
+//                float randomFloat = rand.nextFloat();
+//                if(Math.exp(delta_E/temperature) >= randomFloat){
+//                    next.addPrevious(current);
+//                    if(next.getG_n() > current.getG_n() + current.getNeighbors().get(next)[3]) {
+//                    	next.setG_n(current.getG_n() + current.getNeighbors().get(next)[3]);
+//                    }
+//                    if(current.getG_n() > next.getG_n() + next.getNeighbors().get(current)[3]) {
+//                    	current.setG_n(next.getG_n() + next.getNeighbors().get(current)[3]);
+//                    }
+//                    current.isVisited = true;
+//                    current = next;
+//                }
+//            }
 
         }
 
@@ -73,9 +87,8 @@ public class SimulatedAnnealing {
 
     }
 
-    // calculates the temperature and cools the system
     private double schedule(double t){
-        int k = 30;
+        int k = 20;
         double lam = 0.003;
         int limit = 5000;
         double nT = 0;
@@ -87,7 +100,6 @@ public class SimulatedAnnealing {
 
     private boolean foundPath = false;
 
-    //fill path with previous locations
     private void fillPath(Location l) {
         if(l == start) {
             foundPath = true;

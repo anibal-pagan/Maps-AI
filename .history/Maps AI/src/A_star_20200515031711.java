@@ -36,10 +36,8 @@ public class A_star {
 		return hn+gn;
 	}
 
-	
 	private void traversePath(){
 
-		//beginning location added to explored
 		if(exploredSet.isEmpty()){
 			exploredSet.add(start);
 		}
@@ -47,21 +45,18 @@ public class A_star {
 		while(current != goal){
 
 			for(Location neighbor : current.getNeighbors().keySet()){
-				//add the neighbors if they are not in explored
 				if(!exploredSet.contains(neighbor)) {
 					neighbor.addPrevious(current);
-					//change the g(n) if the distance ([3]) to the current node is less than before
 					if(neighbor.getG_n() > current.getG_n()+current.getNeighbors().get(neighbor)[3]) {
 						neighbor.setG_n(current.getG_n()+current.getNeighbors().get(neighbor)[3]);
 					}
 					frontier.add(neighbor);
 				}
 			}
-			//update the current location
 			current = frontier.poll();
 			exploredSet.add(current);
 		}
-		//the path is obtained by the updated g(n) with shortest distance
+
 		this.bestPathETA = current.getG_n();
 		fillPath(current);
 
@@ -70,7 +65,6 @@ public class A_star {
 	
 	private boolean foundPath = false;
 	
-	//obtains a path by backtracking with g(n) the connected locations until it reaches the start
 	private void fillPath(Location l) {
 		if(l == start) {
 			foundPath = true;

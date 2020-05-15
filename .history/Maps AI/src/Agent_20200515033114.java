@@ -133,7 +133,6 @@ public class Agent {
         }
     }
 
-        //calculates h(n) for each location
     public static void fillH_n(HashMap<String, Location> map) {
         for(String location : map.keySet()) {
             if(map.get(location).isGoal()) {
@@ -152,7 +151,7 @@ public class Agent {
         for(Location l : map.get(currLocation).getNeighbors().keySet()) {
             frontier.add(l);
         }
-        // h(n) = optimistic cost from the current node to the destination
+
         while(!frontier.isEmpty()) {
             Location location = frontier.remove();
             int[] travelInfo = map.get(currLocation).getNeighbors().get(location);
